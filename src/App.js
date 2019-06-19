@@ -34,6 +34,18 @@ const Nav = styled.nav`
   }
 `;
 
+const OpenClose = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 16px;
+  height: 16px;
+  background: orangered;
+  &:hover {
+    background: yellow;
+  }
+`;
+
 function App() {
   const counter = useSelector(state => state.counter);
   const navopen = useSelector(state => state.navopen);
@@ -53,6 +65,7 @@ function App() {
         </Button>
       </header>
       <Nav navopen={navopen}>
+        <OpenClose />
         <ul>
           <li>One</li>
           <li>Two</li>
