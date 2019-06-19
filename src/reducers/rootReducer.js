@@ -1,12 +1,13 @@
 const initialState = {
-  counter: 0
+  counter: 0,
+  navopen: false
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "INCREMENT":
+    case 'INCREMENT':
       return { counter: state.counter + 1 };
-    case "DECREMENT":
+    case 'DECREMENT':
       return { counter: state.counter - 1 };
     default:
       return state;
