@@ -25,6 +25,9 @@ const Nav = styled.nav`
   color: white;
   padding: 1rem;
   text-align: left;
+  &:hover .togglemenu {
+    background: white;
+  }
   ul {
     padding: 0;
     li {
@@ -65,7 +68,7 @@ function App() {
         </Button>
       </header>
       <Nav navopen={navopen}>
-        <OpenClose />
+        <OpenClose className="togglemenu" />
         <ul>
           <li>One</li>
           <li>Two</li>
