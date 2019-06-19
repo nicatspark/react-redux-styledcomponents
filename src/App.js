@@ -25,6 +25,7 @@ const Nav = styled.nav`
   color: white;
   padding: 1rem;
   text-align: left;
+  transition: all 200ms ease-out;
   &:hover .togglemenu {
     background: white;
   }
@@ -44,6 +45,7 @@ const OpenClose = styled.div`
   width: 16px;
   height: 16px;
   background: orangered;
+  cursor: pointer;
   &:hover {
     background: yellow;
   }
@@ -67,7 +69,7 @@ function App() {
           DECREMENT
         </Button>
       </header>
-      <Nav navopen={navopen}>
+      <Nav navopen={navopen} onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
         <OpenClose className="togglemenu" />
         <ul>
           <li>One</li>
