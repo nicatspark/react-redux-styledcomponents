@@ -3,8 +3,10 @@ import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import UseAnimations from 'react-useanimations';
+import { Button } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
-const Button = styled.button`
+const ButtonSC = styled.button`
   background-color: red;
   border-radius: 2px;
   color: white;
@@ -64,12 +66,12 @@ function App() {
           Counter: {counter < 0 ? counter * -1 : counter}{' '}
           <mark>from redux</mark>
         </H1>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>
+        <Button onClick={() => dispatch({ type: 'INCREMENT' })}>
           INCREMENT
-        </button>
-        <Button onClick={() => dispatch({ type: 'DECREMENT' })}>
-          DECREMENT
         </Button>
+        <ButtonSC onClick={() => dispatch({ type: 'DECREMENT' })}>
+          DECREMENT
+        </ButtonSC>
       </header>
       <Nav navopen={navopen} onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
         {/* <OpenClose className='togglemenu' /> */}
