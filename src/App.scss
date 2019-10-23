@@ -19,6 +19,16 @@
   color: white;
 }
 
+.hamburgericon {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  color: #ccc;
+  &:hover {
+    color: white;
+  }
+}
+
 .App-link {
   color: #61dafb;
 }

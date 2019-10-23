@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import UseAnimations from 'react-useanimations';
@@ -59,7 +59,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <UseAnimations animationKey='github' size={50} />
+        <UseAnimations animationKey='activity' size={50} />
         <H1>
           Counter: {counter < 0 ? counter * -1 : counter}{' '}
           <mark>from redux</mark>
@@ -72,7 +72,8 @@ function App() {
         </Button>
       </header>
       <Nav navopen={navopen} onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
-        <OpenClose className='togglemenu' />
+        {/* <OpenClose className='togglemenu' /> */}
+        <UseAnimations animationKey='menu2' className='hamburgericon' />
         <ul>
           <li>One</li>
           <li>Two</li>
