@@ -41,18 +41,18 @@ const Nav = styled.nav`
   }
 `;
 
-const OpenClose = styled.div`
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 16px;
-  height: 16px;
-  background: orangered;
-  cursor: pointer;
-  &:hover {
-    background: yellow;
-  }
-`;
+// const OpenClose = styled.div`
+//   position: absolute;
+//   top: 8px;
+//   right: 8px;
+//   width: 16px;
+//   height: 16px;
+//   background: orangered;
+//   cursor: pointer;
+//   &:hover {
+//     background: yellow;
+//   }
+// `;
 
 function App() {
   const counter = useSelector(state => state.counter);
@@ -61,7 +61,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <UseAnimations animationKey='activity' size={50} />
+        <UseAnimations animationKey='menu' size={50} />
         <H1>
           Counter: {counter < 0 ? counter * -1 : counter}{' '}
           <mark>from redux</mark>
@@ -73,9 +73,11 @@ function App() {
           DECREMENT
         </ButtonSC>
       </header>
-      <Nav navopen={navopen} onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
+      <Nav navopen={navopen}>
         {/* <OpenClose className='togglemenu' /> */}
-        <UseAnimations animationKey='menu2' className='hamburgericon' />
+        <div onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
+          <UseAnimations animationKey='menu' className='hamburgericon' />
+        </div>
         <ul>
           <li>One</li>
           <li>Two</li>
