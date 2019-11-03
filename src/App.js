@@ -3,41 +3,18 @@ import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import UseAnimations from 'react-useanimations';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
-const ButtonSC = styled.button`
-  background-color: red;
-  border-radius: 2px;
-  color: white;
-`;
+import Drawer from './components/Drawer';
+import Button from './components/Button';
+import Nav from './components/Nav';
+
 const H1 = styled.h1`
   color: orangered;
   mark {
     font-size: 0.5em;
     padding: 0 0.3em;
-  }
-`;
-const Nav = styled.nav`
-  position: fixed;
-  top: 0;
-  left: ${props => (props.navopen ? '0' : '-130px')};
-  width: 200px;
-  height: 100vh;
-  background: #333;
-  color: white;
-  padding: 1rem;
-  text-align: left;
-  transition: all 200ms ease-out;
-  &:hover .togglemenu {
-    background: white;
-  }
-  ul {
-    padding: 0;
-    li {
-      list-style: none;
-      margin: 0.5rem;
-    }
   }
 `;
 
@@ -58,24 +35,30 @@ function App() {
   const counter = useSelector(state => state.counter);
   const navopen = useSelector(state => state.navopen);
   const dispatch = useDispatch();
+  function toggleMenu(e) {
+    console.log(e.target);
+    dispatch({ type: 'TOGGLE_MENU' });
+  }
+  function detectClick(e) {
+    console.log('outside:', e, e.target.closest('nav'));
+  }
   return (
-    <div className='App'>
+    <div className='App' onClick={detectClick}>
       <header className='App-header'>
         <UseAnimations animationKey='menu' size={50} />
         <H1>
           Counter: {counter < 0 ? counter * -1 : counter}{' '}
           <mark>from redux</mark>
         </H1>
-        <Button onClick={() => dispatch({ type: 'INCREMENT' })}>
+        <Button primary onClick={() => dispatch({ type: 'INCREMENT' })}>
           INCREMENT
         </Button>
-        <ButtonSC onClick={() => dispatch({ type: 'DECREMENT' })}>
+        <Button onClick={() => dispatch({ type: 'DECREMENT' })}>
           DECREMENT
-        </ButtonSC>
+        </Button>
       </header>
       <Nav navopen={navopen}>
-        {/* <OpenClose className='togglemenu' /> */}
-        <div onClick={() => dispatch({ type: 'TOGGLE_MENU' })}>
+        <div onClick={toggleMenu}>
           <UseAnimations animationKey='menu' className='hamburgericon' />
         </div>
         <ul>
@@ -84,6 +67,7 @@ function App() {
           <li>Three</li>
         </ul>
       </Nav>
+      <Drawer>Some text...</Drawer>
     </div>
   );
 }
