@@ -33,12 +33,8 @@ const H1 = styled.h1`
 
 function App() {
   const counter = useSelector(state => state.counter);
-  const navopen = useSelector(state => state.navopen);
   const dispatch = useDispatch();
-  function toggleMenu(e) {
-    console.log(e.target);
-    dispatch({ type: 'TOGGLE_MENU' });
-  }
+
   function detectClick(e) {
     console.log('outside:', e, e.target.closest('nav'));
   }
@@ -57,10 +53,7 @@ function App() {
           DECREMENT
         </Button>
       </header>
-      <Nav navopen={navopen}>
-        <div onClick={toggleMenu}>
-          <UseAnimations animationKey='menu' className='hamburgericon' />
-        </div>
+      <Nav>
         <ul>
           <li>One</li>
           <li>Two</li>
