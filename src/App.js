@@ -1,67 +1,59 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './App.scss';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import UseAnimations from 'react-useanimations';
 // import { Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
-import Drawer from './components/Drawer';
-import Button from './components/Button';
-import Nav from './components/Nav';
+import Notifications from './components/Notifications';
+import Header from './components/scds-header';
 
-const H1 = styled.h1`
-  color: orangered;
-  mark {
-    font-size: 0.5em;
-    padding: 0 0.3em;
+const AppContainer = styled.div`
+  min-height: 100vh;
+  width: 100vw;
+  background: #ccc;
+  display: grid;
+  grid-template-rows: 85px 1fr;
+  grid-template-columns: 1fr;
+  header {
+    background: white;
+  }
+  section {
+    background: url('/background.jpg') center center no-repeat;
+    background-size: cover;
   }
 `;
 
-// const OpenClose = styled.div`
-//   position: absolute;
-//   top: 8px;
-//   right: 8px;
-//   width: 16px;
-//   height: 16px;
-//   background: orangered;
-//   cursor: pointer;
-//   &:hover {
-//     background: yellow;
-//   }
-// `;
-
 function App() {
-  const counter = useSelector(state => state.counter);
-  const dispatch = useDispatch();
+  // const counter = useSelector(state => state.counter);
+  // const dispatch = useDispatch();
+  const node = useRef();
 
-  function detectClick(e) {
-    console.log('outside:', e, e.target.closest('nav'));
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
+  function handleOutsideClick(e) {
+    if (!node || !node.current) return;
+    if (node.current.contains(e.target)) {
+      // click detected inside cmpt having ref={node}
+      return;
+    }
+    // outside click
+    console.log(e.target);
   }
+
   return (
-    <div className='App' onClick={detectClick}>
-      <header className='App-header'>
-        <UseAnimations animationKey='menu' size={50} />
-        <H1>
-          Counter: {counter < 0 ? counter * -1 : counter}{' '}
-          <mark>from redux</mark>
-        </H1>
-        <Button primary onClick={() => dispatch({ type: 'INCREMENT' })}>
-          INCREMENT
-        </Button>
-        <Button onClick={() => dispatch({ type: 'DECREMENT' })}>
-          DECREMENT
-        </Button>
-      </header>
-      <Nav>
-        <ul>
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-        </ul>
-      </Nav>
-      <Drawer>Some text...</Drawer>
-    </div>
+    <React.Fragment>
+      <AppContainer className='App'>
+        <Header />
+        <section></section>
+      </AppContainer>
+      <Notifications>Some text...</Notifications>
+    </React.Fragment>
   );
 }
 
