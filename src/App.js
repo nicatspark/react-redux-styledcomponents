@@ -1,12 +1,23 @@
 import React, { useEffect, useRef } from 'react';
-import './App.scss';
-// import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-// import { Button } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
-
+// Components
 import Notifications from './components/Notifications';
 import Header from './components/scds-header';
+// CSS
+import 'semantic-ui-css/semantic.min.css';
+import './App.scss';
+// Utils
+import { BreakpointProvider } from './utils/breakpoint';
+
+// import { useSelector, useDispatch } from 'react-redux';
+// import { Button } from 'semantic-ui-react';
+
+const queries = {
+  xs: '(max-width: 320px)',
+  sm: '(max-width: 720px)',
+  md: '(max-width: 1024px)',
+  or: '(orientation: portrait)'
+};
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -47,13 +58,13 @@ function App() {
   }
 
   return (
-    <React.Fragment>
-      <AppContainer className='App'>
+    <BreakpointProvider queries={queries}>
+      <AppContainer>
         <Header />
         <section></section>
       </AppContainer>
       <Notifications>Some text...</Notifications>
-    </React.Fragment>
+    </BreakpointProvider>
   );
 }
 
